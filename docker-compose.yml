@@ -208,6 +208,8 @@ services:
   tools:
     image: cnfltraining/training-tools
     hostname: tools
+    volumes:
+      - ./data:/data
     networks:
       - confluent
     command: /bin/sh
