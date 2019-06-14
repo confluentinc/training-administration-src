@@ -112,7 +112,7 @@ python /data/producer.py
 
 * [Training Page](https://www.confluent.io/training/)
   * Start with the *free* introductory course for a great conceptual foundation of Kafka!
-* [Confluent Platform quickstart](https://docs.confluent.io/current/quickstart/ce-docker-quickstart.html#step-6-stop-docker)
+* [Confluent Platform quickstart](https://docs.confluent.io/current/quickstart/ce-docker-quickstart.html)
   * This is a great hands-on to get started with the basics!
 * [Kafka Connect example](https://github.com/confluentinc/examples/tree/5.2.1-post/mysql-debezium)
   * Kafka Connect the best way to get data in and out of Kafka!
