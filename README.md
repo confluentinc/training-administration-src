@@ -115,6 +115,7 @@ python /data/producer.py
   * Kafka Connect the best way to get data in and out of Kafka!
 * [Many other awesome examples](https://github.com/confluentinc/examples)
 * [Ansible playbook](https://github.com/confluentinc/cp-ansible) for automating configuration
+* [Configurations!](https://docs.confluent.io/current/installation/configuration/index.html) So many configurations! Become friends with the configurations. Brokers. Consumers. Producers. Topics. Oh my!
 
 
 
