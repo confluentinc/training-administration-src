@@ -110,12 +110,17 @@ python /data/producer.py
 
 ## Other resources
 
+* [Training Page](https://www.confluent.io/training/)
+  * Start with the *free* introductory course for a great conceptual foundation of Kafka!
 * [Confluent Platform quickstart](https://docs.confluent.io/current/quickstart/ce-docker-quickstart.html#step-6-stop-docker)
+  * This is a great hands-on to get started with the basics!
 * [Kafka Connect example](https://github.com/confluentinc/examples/tree/5.2.1-post/mysql-debezium)
   * Kafka Connect the best way to get data in and out of Kafka!
 * [Many other awesome examples](https://github.com/confluentinc/examples)
-* [Ansible playbook](https://github.com/confluentinc/cp-ansible) for automating configuration
-* [Configurations!](https://docs.confluent.io/current/installation/configuration/index.html) So many configurations! Become friends with the configurations. Brokers. Consumers. Producers. Topics. Oh my!
+* [Ansible playbook](https://github.com/confluentinc/cp-ansible)
+  * Automate configuration!
+* [Configurations!](https://docs.confluent.io/current/installation/configuration/index.html)
+  * So many configurations! Become friends with the configurations. Brokers. Consumers. Producers. Topics. Oh my!
 
 
 
