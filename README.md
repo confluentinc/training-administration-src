@@ -114,6 +114,7 @@ python /data/producer.py
 * [Kafka Connect example](https://github.com/confluentinc/examples/tree/5.2.1-post/mysql-debezium)
   * Kafka Connect the best way to get data in and out of Kafka!
 * [Many other awesome examples](https://github.com/confluentinc/examples)
+* [Ansible playbook](https://github.com/confluentinc/cp-ansible) for automating configuration
 
 
 
