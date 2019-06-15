@@ -100,6 +100,10 @@ root@kafka-1: less /etc/kafka/kafka.properties
 
 4. Other components of the cluster have similar configuration files. Explore them, too! Look up what the configuration properties do in more detail in the [Confluent docs](https://docs.confluent.io/current/installation/configuration/index.html)
 
+## Monitor your cluster!
+
+Open up Google Chrome and go to localhost:9021 to monitor your cluster with Confluent Control Center!
+
 ## Play with app development
 
 From this repo, there is a `./data` folder. This folder is mapped to the `/data` folder inside the `tools` container. This means you can create projects inside the `./data` folder on your local machine with your favorite IDE and then run that code from within the `tools` container to interact with the Kafka brokers. [Here is an example python producer](https://github.com/confluentinc/confluent-kafka-python/blob/master/examples/producer.py) that uses the C-based `librdkafka` library rather than the native Java library. You can create your own `producer.py` file in `./data`. Then run your app from within the `tools` container:
