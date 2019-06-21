@@ -3,6 +3,7 @@ services:
   zk-1:
     image: confluentinc/cp-zookeeper:5.2.1
     container_name: zk-1
+    hostname: zk-1
     volumes:
       - data-zk-log-1:/var/lib/zookeeper/log
       - data-zk-data-1:/var/lib/zookeeper/data
@@ -19,6 +20,7 @@ services:
   zk-2:
     image: confluentinc/cp-zookeeper:5.2.1
     container_name: zk-2
+    hostname: zk-2
     volumes:
       - data-zk-log-2:/var/lib/zookeeper/log
       - data-zk-data-2:/var/lib/zookeeper/data
@@ -35,6 +37,7 @@ services:
   zk-3:
     image: confluentinc/cp-zookeeper:5.2.1
     container_name: zk-3
+    hostname: zk-3
     volumes:
       - data-zk-log-3:/var/lib/zookeeper/log
       - data-zk-data-3:/var/lib/zookeeper/data
@@ -56,7 +59,7 @@ services:
       - confluent
     volumes:
       - data-kafka-1:/var/lib/kafka/data
-      - $PWD/scripts/security/kafka-1-creds:/etc/kafka/secrets
+      - $PWD/kafka-1-creds:/etc/kafka/secrets
     environment:
       KAFKA_BROKER_ID: 101
       KAFKA_ZOOKEEPER_CONNECT: zk-1:2181,zk-2:2181,zk-3:2181
@@ -77,11 +80,12 @@ services:
   kafka-2:
     image: confluentinc/cp-enterprise-kafka:5.2.1
     container_name: kafka-2
+    hostname: kafka-2
     networks:
       - confluent
     volumes:
       - data-kafka-2:/var/lib/kafka/data
-      - $PWD/scripts/security/kafka-2-creds:/etc/kafka/secrets
+      - $PWD/kafka-2-creds:/etc/kafka/secrets
     environment:
       KAFKA_BROKER_ID: 102
       KAFKA_ZOOKEEPER_CONNECT: zk-1:2181,zk-2:2181,zk-3:2181
@@ -102,11 +106,12 @@ services:
   kafka-3:
     image: confluentinc/cp-enterprise-kafka:5.2.1
     container_name: kafka-3
+    hostname: kafka-3
     networks:
       - confluent
     volumes:
       - data-kafka-3:/var/lib/kafka/data
-      - $PWD/scripts/security/kafka-3-creds:/etc/kafka/secrets
+      - $PWD/kafka-3-creds:/etc/kafka/secrets
     environment:
       KAFKA_BROKER_ID: 103
       KAFKA_ZOOKEEPER_CONNECT: zk-1:2181,zk-2:2181,zk-3:2181
@@ -158,7 +163,7 @@ services:
     image: cnfltraining/training-tools:19.06
     hostname: tools
     volumes:
-      - $PWD/scripts/security/client-creds:/scripts/security/client-creds
+      - $PWD/client-creds:/client-creds
     networks:
       - confluent
     command: /bin/sh
