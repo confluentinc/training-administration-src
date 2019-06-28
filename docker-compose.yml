@@ -143,17 +143,6 @@ services:
       CONNECT_PLUGIN_PATH: /usr/share/java
       CONNECT_REST_HOST_NAME: "connect"
 
-  rest-proxy:
-    image: confluentinc/cp-kafka-rest:5.2.1
-    hostname: rest-proxy
-    networks:
-      - confluent
-    environment:
-      KAFKA_REST_HOST_NAME: rest-proxy
-      KAFKA_REST_BOOTSTRAP_SERVERS: kafka-1:9092,kafka-2:9092,kafka-3:9092
-      KAFKA_REST_LISTENERS: "http://0.0.0.0:8082"
-      KAFKA_REST_SCHEMA_REGISTRY_URL: "http://schema-registry:8081"
-
   ksql-server:
     image: confluentinc/cp-ksql-server:5.2.1
     hostname: ksql-server
