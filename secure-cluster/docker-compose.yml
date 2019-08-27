@@ -162,6 +162,7 @@ services:
 
   tools:
     image: cnfltraining/training-tools:19.06
+    container_name: tools
     hostname: tools
     volumes:
       - $PWD/client-creds:/client-creds
