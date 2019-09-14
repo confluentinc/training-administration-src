@@ -115,6 +115,7 @@ services:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: "kafka-1:9092,kafka-2:9092,kafka-3:9092"
       SCHEMA_REGISTRY_LISTENERS: http://schema-registry:8081
+      SCHEMA_REGISTRY_CUB_KAFKA_TIMEOUT: 120
 
   connect:
     image: confluentinc/cp-kafka-connect:5.3.0
@@ -150,6 +151,7 @@ services:
       CONNECT_LOG4J_LOGGERS: org.reflections=ERROR
       CONNECT_PLUGIN_PATH: /usr/share/java
       CONNECT_REST_HOST_NAME: "connect"
+      CONNECT_CUB_KAFKA_TIMEOUT: 120
 
   ksql-server:
     image: confluentinc/cp-ksql-server:5.3.0
