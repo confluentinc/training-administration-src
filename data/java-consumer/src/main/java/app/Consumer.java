@@ -12,14 +12,6 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 
-/*
-Declare serializers and deserializers for record keys and values.
-Producers serialize keys and values into byte arrays when sending to Kafka,
-    and consumers deserialize the records when they read from Kafka.
-Here we only need a string deserializer since we are expecting string keys and values.
-*/
-import org.apache.kafka.common.serialization.StringDeserializer;
-
 public class Consumer {
     public static void main(String[] args) throws Exception {
         System.out.println("Starting Consumer");
@@ -31,8 +23,6 @@ public class Consumer {
         final Properties settings = new Properties();
         InputStream input = new FileInputStream("src/main/resources/consumer.properties");
         settings.load(input);
-        settings.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        settings.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 
         // Create consumer. In brackets we have the key's type and the value's type.
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(settings);
