@@ -6,12 +6,12 @@ if __name__ == '__main__':
         sys.stderr.write('Usage: %s <bootstrap-brokers> <topic>\n' % sys.argv[0])
         sys.exit(1)
 
-    broker = sys.argv[1]
+    brokers = sys.argv[1]
     topic = sys.argv[2]
 
     # Producer configuration
     # See https://github.com/edenhill/librdkafka/blob/master/CONFIGURATION.md
-    conf = {'bootstrap.servers': broker}
+    conf = {'bootstrap.servers': brokers}
 
     # Create Producer instance
     p = Producer(**conf)
