@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Properties;
 
-import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -44,7 +43,13 @@ public class Consumer {
                     final String key = record.key();
                     final String value = record.value();
 
-                    System.out.printf("Record at offset %d:\n\tkey: %s\n\t value: %s\n", record.offset(), key, value);
+                    System.out.printf(
+                        "Record information:\npartition: %d\noffset: %d\nkey: %s\n value: %s\n",
+                            record.partition(),
+                            record.offset(),
+                            key,
+                            value
+                        );
                 }
             }
         } finally {
