@@ -93,7 +93,7 @@ root@kafka-1: less /etc/kafka/server.properties
 
 This is just an example broker configuration file. For complicated reasons, the actual configuration file the container uses is called `kafka.properties` and is created from environment variables in `docker-compose.yml`. 
 
-3. Take a look at `docker-compose.yml` environment varables and compare that to `kafka.properties`:
+3. Take a look at `docker-compose.yml` environment variables and compare that to `kafka.properties`:
 ```bash
 root@kafka-1: less /etc/kafka/kafka.properties
 ```
