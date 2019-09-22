@@ -25,7 +25,7 @@ docker-compose down -v
 Enter the `tools` container to run commands against the Kafka cluster:
 
 ```
-docker-compose exec tools /bin/bash
+docker-compose exec tools bash
 ```
 
 ## Example commands against cluster
@@ -83,32 +83,32 @@ How might you do a consumer performance test, I wonder?
 1. Enter the broker host `kafka-1`:
 
 ```
-docker-compose exec kafka-1 /bin/bash
+docker-compose exec kafka-1 bash
 ```
 2. Take a look at `server.propertes`:
 
-```bash
-root@kafka-1: less /etc/kafka/server.properties
+```
+root@kafka-1:/# less /etc/kafka/server.properties
 ```
 
 This is just an example broker configuration file. For complicated reasons, the actual configuration file the container uses is called `kafka.properties` and is created from environment variables in `docker-compose.yml`. 
 
 3. Take a look at `docker-compose.yml` environment variables and compare that to `kafka.properties`:
-```bash
-root@kafka-1: less /etc/kafka/kafka.properties
+```
+root@kafka-1:/# less /etc/kafka/kafka.properties
 ```
 
 4. Other components of the cluster have similar configuration files. Explore them, too! Look up what the configuration properties do in more detail in the [Confluent docs](https://docs.confluent.io/current/installation/configuration/index.html)
 
 ## Monitor your cluster!
 
-Open up Google Chrome and go to localhost:9021 to monitor your cluster with Confluent Control Center!
+Open up Google Chrome and go to `localhost:9021` to monitor your cluster with Confluent Control Center!
 
 ## Play with app development
 
-From this repo, there is a `./data` folder. This folder is mapped to the `/data` folder inside the `tools` container. This means you can create projects inside the `./data` folder on your local machine with your favorite IDE and then run that code from within the `tools` container to interact with the Kafka brokers. We have included a Python producer and a Java consumer. Your challenge is to start the cluster, create a topic called `test-topic`, consume from it with the Java consumer, and produce to it with the Python producer in a separate terminal window so you can see the messages in real time. Look at the code and see if you can complete the challenge on your own before reading on. For the Java consumer, look specifically at `src/main/java/app/Consumer.java`, `src/main/resources/consumer.properties`, and `build.gradle`.
+From this repo, there is a `./data` folder. This folder is mapped to the `/data` folder inside the `tools` container. This means you can create projects inside the `./data` folder on your local machine with your favorite IDE and then run that code from within the `tools` container to interact with the Kafka brokers. We have included a Python producer and a Java consumer. **Your challenge** is to start the cluster, create a topic called `test-topic`, consume from it with the Java consumer, and produce to it with the Python producer in a separate terminal window so you can see the messages in real time. Look at the code and see if you can complete the challenge on your own before reading on. For the Java consumer, look specifically at `src/main/java/app/Consumer.java`, `src/main/resources/consumer.properties`, and `build.gradle`.
 
-Within the `tools` container, create the topic and start the consumer:
+Here are the steps to starting the consumer and producer. Within the `tools` container, create the topic and start the consumer:
 ```
 $ docker-compose exec tools bash
 root@tools:/# kafka-topics \

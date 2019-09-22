@@ -16,7 +16,7 @@ jar {
     baseName = 'consumer'
 }
 
-// Using Java 11
+// Using Java 8
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 

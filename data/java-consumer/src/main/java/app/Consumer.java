@@ -32,7 +32,8 @@ public class Consumer {
 
             /*
             Consume records. This is where your business logic goes.
-            Here, we simply print the offset, key, and value of each record to standard output.
+            Here, we simply print the partition, offset, key, and value
+            of each record to standard output.
             */
 
             while (true) {
