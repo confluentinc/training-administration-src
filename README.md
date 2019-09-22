@@ -104,7 +104,7 @@ root@kafka-1:/# less /etc/kafka/kafka.properties
 
 Open up Google Chrome and go to `localhost:9021` to monitor your cluster with Confluent Control Center!
 
-## Play with app development
+## Play with app development!
 
 From this repo, there is a `./data` folder. This folder is mapped to the `/data` folder inside the `tools` container. This means you can create projects inside the `./data` folder on your local machine with your favorite IDE and then run that code from within the `tools` container to interact with the Kafka brokers. We have included a Python producer and a Java consumer. **Your challenge** is to start the cluster, create a topic called `test-topic`, consume from it with the Java consumer, and produce to it with the Python producer in a separate terminal window so you can see the messages in real time. Look at the code and see if you can complete the challenge on your own before reading on. For the Java consumer, look specifically at `src/main/java/app/Consumer.java`, `src/main/resources/consumer.properties`, and `build.gradle`.
 
@@ -131,6 +131,8 @@ root@tools:/data/python-producer/# python producer.py \
 ```
 
 Now play! If you'd like to create your own Java applications, an easy way is to create a new subdirectory under the `data/` and run `gradle init` from within your new directory inside the `tools` container. This will create the basics needed for a Java application. Use the contents of the `java-consumer` directory as a template for your new project.
+
+Don't forget to exit the `tools` container and clean up with `docker-compose down -v` on your host.
 
 ## Other resources
 
