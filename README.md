@@ -106,7 +106,7 @@ Open up Google Chrome and go to localhost:9021 to monitor your cluster with Conf
 
 ## Play with app development
 
-From this repo, there is a `./data` folder. This folder is mapped to the `/data` folder inside the `tools` container. This means you can create projects inside the `./data` folder on your local machine with your favorite IDE and then run that code from within the `tools` container to interact with the Kafka brokers. We have included a Python producer and a Java consumer. Your challenge is to start the cluster, create a topic called `test-topic`, consume from it with the Java consumer, and produce to it with the Python producer in a separate terminal window so you can see the messages in real time. Look at the code and see if you can complete the challenge on your own before reading on.
+From this repo, there is a `./data` folder. This folder is mapped to the `/data` folder inside the `tools` container. This means you can create projects inside the `./data` folder on your local machine with your favorite IDE and then run that code from within the `tools` container to interact with the Kafka brokers. We have included a Python producer and a Java consumer. Your challenge is to start the cluster, create a topic called `test-topic`, consume from it with the Java consumer, and produce to it with the Python producer in a separate terminal window so you can see the messages in real time. Look at the code and see if you can complete the challenge on your own before reading on. For the Java consumer, look specifically at `src/main/java/app/Consumer.java`, `src/main/resources/consumer.properties`, and `build.gradle`.
 
 Within the `tools` container, create the topic and start the consumer:
 ```
