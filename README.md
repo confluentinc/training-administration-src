@@ -142,9 +142,12 @@ Don't forget to exit the `tools` container and clean up with `docker-compose dow
   * This is a great hands-on to get started with the basics!
 * [Kafka Connect example](https://github.com/confluentinc/examples/tree/5.3.0-post/mysql-debezium)
   * Kafka Connect the best way to get data in and out of Kafka!
-* [Many other awesome examples](https://github.com/confluentinc/examples)
+* [Confluent's "examples" repo](https://github.com/confluentinc/examples)
+  * Tons of great examples!
 * [Kafka Tutorials](https://kafka-tutorials.confluent.io/)
+  * Tutorials about how to accomplish specific tasks. A great place to see best practices in code, testing, and artifact building (with Gradle Jib).
 * [KSQL Recipes](https://www.confluent.io/stream-processing-cookbook/)
+  * Tons of KSQL applications!
 * [Ansible playbook](https://github.com/confluentinc/cp-ansible)
   * Automate configuration!
 * [Configurations!](https://docs.confluent.io/current/installation/configuration/index.html)
