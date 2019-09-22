@@ -113,8 +113,8 @@ Here are the steps to starting the consumer and producer. Within the `tools` con
 $ docker-compose exec tools bash
 root@tools:/# kafka-topics \
                 --create --topic test-topic \
-                --bootsrap-server kafka-1:9092 \
-                --partitions 6
+                --bootstrap-server kafka-1:9092 \
+                --partitions 6 \
                 --replication-factor 1
 root@tools:/# cd data/java-consumer
 root@tools:/data/java-consumer/# gradle run
