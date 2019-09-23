@@ -130,7 +130,7 @@ root@tools:/data/python-producer/# python producer.py \
                 test-topic
 ```
 
-Now play! If you'd like to create your own Java applications, an easy way is to create a new subdirectory under the `data/` and run `gradle init` from within your new directory inside the `tools` container. This will create the basics needed for a Java application. Use the contents of the `java-consumer` directory as a template for your new project.
+Now play! If you'd like to create your own Java applications, an easy way is to create a new subdirectory under the `data/` module and run `gradle init` from within your new directory inside the `tools` container. This will create the basics needed for a Java application. Use the contents of the `java-consumer` directory as a template for your new project.
 
 Don't forget to exit the `tools` container and clean up with `docker-compose down -v` on your host.
 
@@ -138,6 +138,11 @@ Don't forget to exit the `tools` container and clean up with `docker-compose dow
 
 * [Training Page](https://www.confluent.io/training/)
   * Start with the *free* introductory course for a great conceptual foundation of Kafka!
+  * If you want to learn about Kafka administration, see our Operations course!
+  * If you already know about Kafka administration, see our Advanced Optimization course!
+  * If you want to dig deeper into development, see our Developer course!
+  * If you already know a bit about developing Kafka clients, push further with our KSQL and Kafka Streams course!
+  * Remember that more courses are being developed all the time! 
 * [Confluent Platform quickstart](https://docs.confluent.io/current/quickstart/ce-docker-quickstart.html)
   * This is a great hands-on to get started with the basics!
 * [Kafka Connect example](https://github.com/confluentinc/examples/tree/5.3.0-post/mysql-debezium)
