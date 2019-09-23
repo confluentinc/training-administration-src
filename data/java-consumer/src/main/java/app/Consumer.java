@@ -45,7 +45,7 @@ public class Consumer {
                     final String value = record.value();
 
                     System.out.printf(
-                        "Record information:\npartition: %d\noffset: %d\nkey: %s\n value: %s\n",
+                        "Record information:\npartition: %d\noffset: %d\nkey: %s\nvalue: %s\n",
                             record.partition(),
                             record.offset(),
                             key,
