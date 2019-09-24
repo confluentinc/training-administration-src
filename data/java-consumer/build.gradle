@@ -1,0 +1,30 @@
+plugins {
+  id 'java'
+  id 'application'
+}
+
+// Define the main class for the application, which is part of the `application` plugin
+mainClassName = 'app.Consumer'
+
+// Where to get dependencies from. Could also use JCenter.
+repositories {
+    mavenCentral()
+    maven { url 'http://packages.confluent.io/maven/' }
+}
+
+jar {
+    baseName = 'consumer'
+}
+
+// Using Java 8
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    // Apache Kafka client
+    compile group: 'org.apache.kafka', name: 'kafka-clients', version: '2.3.0'  
+    // Monitoring interceptor for Confluent Control Center
+    compile group: "io.confluent", name: "monitoring-interceptors", version: '5.3.1' 
+    // log4j for application logging
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.25'
+}
