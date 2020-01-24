@@ -151,8 +151,8 @@ Don't forget to exit the `tools` container and clean up with `docker-compose dow
   * Tons of great examples!
 * [Kafka Tutorials](https://kafka-tutorials.confluent.io/)
   * Tutorials about how to accomplish specific tasks. A great place to see best practices in code, testing, and artifact building (with Gradle Jib).
-* [KSQL Recipes](https://www.confluent.io/stream-processing-cookbook/)
-  * Tons of KSQL applications!
+* [ksqlDB.io](https://ksqldb.io/)
+  * Your one stop shop for all things ksqlDB (docs, examples, concepts) 
 * [Ansible playbook](https://github.com/confluentinc/cp-ansible)
   * Automate configuration!
 * [Configurations!](https://docs.confluent.io/current/installation/configuration/index.html)
