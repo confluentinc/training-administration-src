@@ -62,7 +62,7 @@ services:
     hostname: kafka-1
     container_name: kafka-1
     ports:
-      - "19092:9092"
+      - "19092:19092"
     networks:
       - confluent
     volumes:
@@ -82,7 +82,7 @@ services:
     hostname: kafka-2
     container_name: kafka-2
     ports:
-      - "29092:9092"
+      - "29092:29092"
     networks:
       - confluent
     volumes:
@@ -102,7 +102,7 @@ services:
     hostname: kafka-3
     container_name: kafka-3
     ports:
-      - "39092:9092"
+      - "39092:39092"
     networks:
       - confluent
     volumes:
