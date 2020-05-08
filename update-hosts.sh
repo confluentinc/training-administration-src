@@ -9,6 +9,8 @@ if grep "ADM 5.5.0-v1.0.0 host entries" /etc/hosts >/dev/null; then
   exit 0
 fi
 
+cat << EOF | sudo tee -a /etc/hosts >/dev/null
+
 # ADM 5.5.0-v1.0.0 host entries
 127.0.0.1 zk-1
 127.0.0.1 zk-2
