@@ -1,7 +1,7 @@
 version: "3.5"
 services:
   zk-1:
-    image: confluentinc/cp-zookeeper:5.3.0
+    image: confluentinc/cp-zookeeper:5.5.0-1-ubi8
     container_name: zk-1
     hostname: zk-1
     volumes:
@@ -18,7 +18,7 @@ services:
       - ZOOKEEPER_SERVERS=zk-1:2888:3888;zk-2:2888:3888;zk-3:2888:3888
   
   zk-2:
-    image: confluentinc/cp-zookeeper:5.3.0
+    image: confluentinc/cp-zookeeper:5.5.0-1-ubi8
     container_name: zk-2
     hostname: zk-2
     volumes:
@@ -35,7 +35,7 @@ services:
       - ZOOKEEPER_SERVERS=zk-1:2888:3888;zk-2:2888:3888;zk-3:2888:3888
   
   zk-3:
-    image: confluentinc/cp-zookeeper:5.3.0
+    image: confluentinc/cp-zookeeper:5.5.0-1-ubi8
     container_name: zk-3
     hostname: zk-3
     volumes:
@@ -52,7 +52,7 @@ services:
       - ZOOKEEPER_SERVERS=zk-1:2888:3888;zk-2:2888:3888;zk-3:2888:3888
 
   kafka-1:
-    image: confluentinc/cp-enterprise-kafka:5.3.0
+    image: confluentinc/cp-enterprise-kafka:5.5.0-1-ubi8
     container_name: kafka-1
     hostname: kafka-1
     networks:
@@ -78,7 +78,7 @@ services:
       #KAFKA_SSL_CLIENT_AUTH: "required"
 
   kafka-2:
-    image: confluentinc/cp-enterprise-kafka:5.3.0
+    image: confluentinc/cp-enterprise-kafka:5.5.0-1-ubi8
     container_name: kafka-2
     hostname: kafka-2
     networks:
@@ -104,7 +104,7 @@ services:
       #KAFKA_SSL_CLIENT_AUTH: "required"
 
   kafka-3:
-    image: confluentinc/cp-enterprise-kafka:5.3.0
+    image: confluentinc/cp-enterprise-kafka:5.5.0-1-ubi8
     container_name: kafka-3
     hostname: kafka-3
     networks:
@@ -130,7 +130,7 @@ services:
       #KAFKA_SSL_CLIENT_AUTH: "required"
 
   schema-registry:
-    image: confluentinc/cp-schema-registry:5.3.0
+    image: confluentinc/cp-schema-registry:5.5.0-1-ubi8
     container_name: schema-registry
     hostname: schema-registry
     networks:
@@ -141,7 +141,7 @@ services:
       SCHEMA_REGISTRY_LISTENERS: http://schema-registry:8081
 
   control-center:
-    image: confluentinc/cp-enterprise-control-center:5.3.0
+    image: confluentinc/cp-enterprise-control-center:5.5.0-1-ubi8
     container_name: control-center
     restart: always
     networks:
@@ -161,7 +161,7 @@ services:
       CONTROL_CENTER_SCHEMA_REGISTRY_URL: "http://schema-registry:8081"
 
   tools:
-    image: cnfltraining/training-tools:19.06
+    image: cnfltraining/training-tools:5.5
     container_name: tools
     hostname: tools
     volumes:
