@@ -1,6 +1,6 @@
 # training-operations-src
 
-This repo contains the source code needed for Confluent Operations Training for Apache Kafka.
+This repo contains the source code needed for Confluent Administration Training for Apache Kafka.
 
 ## Start your own Kafka Cluster!
 
