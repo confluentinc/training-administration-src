@@ -4,6 +4,8 @@ services:
     image: confluentinc/cp-zookeeper:5.5.0-1-ubi8
     container_name: zk-1
     hostname: zk-1
+    ports:
+      - "12181:12181"
     volumes:
       - data-zk-log-1:/var/lib/zookeeper/log
       - data-zk-data-1:/var/lib/zookeeper/data
@@ -11,7 +13,7 @@ services:
       - confluent
     environment:
       - ZOOKEEPER_SERVER_ID=1
-      - ZOOKEEPER_CLIENT_PORT=2181
+      - ZOOKEEPER_CLIENT_PORT=12181
       - ZOOKEEPER_TICK_TIME=2000
       - ZOOKEEPER_INIT_LIMIT=5
       - ZOOKEEPER_SYNC_LIMIT=2
@@ -21,6 +23,8 @@ services:
     image: confluentinc/cp-zookeeper:5.5.0-1-ubi8
     container_name: zk-2
     hostname: zk-2
+    ports:
+      - "22181:22181"
     volumes:
       - data-zk-log-2:/var/lib/zookeeper/log
       - data-zk-data-2:/var/lib/zookeeper/data
@@ -28,7 +32,7 @@ services:
       - confluent
     environment:
       - ZOOKEEPER_SERVER_ID=2
-      - ZOOKEEPER_CLIENT_PORT=2181
+      - ZOOKEEPER_CLIENT_PORT=22181
       - ZOOKEEPER_TICK_TIME=2000
       - ZOOKEEPER_INIT_LIMIT=5
       - ZOOKEEPER_SYNC_LIMIT=2
@@ -38,6 +42,8 @@ services:
     image: confluentinc/cp-zookeeper:5.5.0-1-ubi8
     container_name: zk-3
     hostname: zk-3
+    ports:
+      - "32181:32181"
     volumes:
       - data-zk-log-3:/var/lib/zookeeper/log
       - data-zk-data-3:/var/lib/zookeeper/data
@@ -45,7 +51,7 @@ services:
       - confluent
     environment:
       - ZOOKEEPER_SERVER_ID=3
-      - ZOOKEEPER_CLIENT_PORT=2181
+      - ZOOKEEPER_CLIENT_PORT=32181
       - ZOOKEEPER_TICK_TIME=2000
       - ZOOKEEPER_INIT_LIMIT=5
       - ZOOKEEPER_SYNC_LIMIT=2
@@ -55,6 +61,9 @@ services:
     image: confluentinc/cp-enterprise-kafka:5.5.0-1-ubi8
     container_name: kafka-1
     hostname: kafka-1
+    ports:
+      - "19092:19092"
+      - "19093:19093"      
     networks:
       - confluent
     volumes:
@@ -62,13 +71,13 @@ services:
       - $PWD/kafka-1-creds:/etc/kafka/secrets
     environment:
       KAFKA_BROKER_ID: 101
-      KAFKA_ZOOKEEPER_CONNECT: zk-1:2181,zk-2:2181,zk-3:2181
+      KAFKA_ZOOKEEPER_CONNECT: zk-1:12181,zk-2:22181,zk-3:32181
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
       KAFKA_DELETE_TOPIC_ENABLE: "true"
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_METRIC_REPORTERS: "io.confluent.metrics.reporter.ConfluentMetricsReporter"
       CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: "kafka-1:9092,kafka-2:9092,kafka-3:9092"
-      KAFKA_ADVERTISED_LISTENERS: SSL://kafka-1:9093,PLAINTEXT://kafka-1:9092
+      KAFKA_ADVERTISED_LISTENERS: SSL://kafka-1:19093,PLAINTEXT://kafka-1:19092
       KAFKA_SSL_KEYSTORE_FILENAME: kafka.kafka-1.keystore.jks
       KAFKA_SSL_KEYSTORE_CREDENTIALS: kafka-1_keystore_creds
       KAFKA_SSL_KEY_CREDENTIALS: kafka-1_sslkey_creds
@@ -81,6 +90,9 @@ services:
     image: confluentinc/cp-enterprise-kafka:5.5.0-1-ubi8
     container_name: kafka-2
     hostname: kafka-2
+    ports:
+      - "29092:29092"
+      - "29093:29093"  
     networks:
       - confluent
     volumes:
@@ -88,13 +100,13 @@ services:
       - $PWD/kafka-2-creds:/etc/kafka/secrets
     environment:
       KAFKA_BROKER_ID: 102
-      KAFKA_ZOOKEEPER_CONNECT: zk-1:2181,zk-2:2181,zk-3:2181
+      KAFKA_ZOOKEEPER_CONNECT: zk-1:12181,zk-2:22181,zk-3:32181
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
       KAFKA_DELETE_TOPIC_ENABLE: "true"
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_METRIC_REPORTERS: "io.confluent.metrics.reporter.ConfluentMetricsReporter"
       CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: "kafka-1:9092,kafka-2:9092,kafka-3:9092"
-      KAFKA_ADVERTISED_LISTENERS: SSL://kafka-2:9093,PLAINTEXT://kafka-2:9092
+      KAFKA_ADVERTISED_LISTENERS: SSL://kafka-2:29093,PLAINTEXT://kafka-2:29092
       KAFKA_SSL_KEYSTORE_FILENAME: kafka.kafka-2.keystore.jks
       KAFKA_SSL_KEYSTORE_CREDENTIALS: kafka-2_keystore_creds
       KAFKA_SSL_KEY_CREDENTIALS: kafka-2_sslkey_creds
@@ -107,6 +119,9 @@ services:
     image: confluentinc/cp-enterprise-kafka:5.5.0-1-ubi8
     container_name: kafka-3
     hostname: kafka-3
+    ports:
+      - "39092:39092"
+      - "39093:39093"  
     networks:
       - confluent
     volumes:
@@ -114,13 +129,13 @@ services:
       - $PWD/kafka-3-creds:/etc/kafka/secrets
     environment:
       KAFKA_BROKER_ID: 103
-      KAFKA_ZOOKEEPER_CONNECT: zk-1:2181,zk-2:2181,zk-3:2181
+      KAFKA_ZOOKEEPER_CONNECT: zk-1:12181,zk-2:22181,zk-3:32181
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
       KAFKA_DELETE_TOPIC_ENABLE: "true"
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_METRIC_REPORTERS: "io.confluent.metrics.reporter.ConfluentMetricsReporter"
       CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: "kafka-1:9092,kafka-2:9092,kafka-3:9092"
-      KAFKA_ADVERTISED_LISTENERS: SSL://kafka-3:9093,PLAINTEXT://kafka-3:9092
+      KAFKA_ADVERTISED_LISTENERS: SSL://kafka-3:39093,PLAINTEXT://kafka-3:39092
       KAFKA_SSL_KEYSTORE_FILENAME: kafka.kafka-3.keystore.jks
       KAFKA_SSL_KEYSTORE_CREDENTIALS: kafka-3_keystore_creds
       KAFKA_SSL_KEY_CREDENTIALS: kafka-3_sslkey_creds
