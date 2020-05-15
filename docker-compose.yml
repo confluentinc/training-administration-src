@@ -141,6 +141,8 @@ services:
     container_name: connect
     ports:
       - "8083:8083"
+    volumes:
+      - ./data:/data
     networks:
       - confluent
     environment:
@@ -148,7 +150,7 @@ services:
       CONNECT_CONSUMER_INTERCEPTOR_CLASSES: io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor
       CONNECT_BOOTSTRAP_SERVERS: kafka-1:9092,kafka-2:9092,kafka-3:9092
       CONNECT_GROUP_ID: "connect"
-      CONNECT_CONFIG_STORAGE_TOPIC: "connect-config"
+      CONNECT_CONFIG_STORAGE_TOPIC: "connect-configs"
       CONNECT_OFFSET_STORAGE_TOPIC: "connect-offsets"
       CONNECT_STATUS_STORAGE_TOPIC: "connect-statuses"
       CONNECT_KEY_CONVERTER: "io.confluent.connect.avro.AvroConverter"
