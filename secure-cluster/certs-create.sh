@@ -56,3 +56,5 @@ do
 	openssl pkcs12 -in $i-creds/$i.keystore.p12 -nodes -nocerts -out $i-creds/$i.key -passin pass:confluent
 
 done
+
+while ! openssl s_client -connect kafka-3:19093 -tls1 > /dev/null 2>&1 <<< "q" ; do sleep 1 ; done
