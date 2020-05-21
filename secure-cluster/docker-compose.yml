@@ -77,7 +77,9 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_METRIC_REPORTERS: "io.confluent.metrics.reporter.ConfluentMetricsReporter"
       CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: "kafka-1:9092,kafka-2:9092,kafka-3:9092"
-      KAFKA_ADVERTISED_LISTENERS: SSL://kafka-1:19093,PLAINTEXT://kafka-1:19092
+      KAFKA_ADVERTISED_LISTENERS: SSL://kafka-1:19093,PLAINTEXT://kafka-1:19092,DOCKER://kafka-1:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,SSL:SSL,DOCKER:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: DOCKER
       KAFKA_SSL_KEYSTORE_FILENAME: kafka.kafka-1.keystore.jks
       KAFKA_SSL_KEYSTORE_CREDENTIALS: kafka-1_keystore_creds
       KAFKA_SSL_KEY_CREDENTIALS: kafka-1_sslkey_creds
@@ -106,7 +108,9 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_METRIC_REPORTERS: "io.confluent.metrics.reporter.ConfluentMetricsReporter"
       CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: "kafka-1:9092,kafka-2:9092,kafka-3:9092"
-      KAFKA_ADVERTISED_LISTENERS: SSL://kafka-2:29093,PLAINTEXT://kafka-2:29092
+      KAFKA_ADVERTISED_LISTENERS: SSL://kafka-2:29093,PLAINTEXT://kafka-2:29092,DOCKER://kafka-2:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,SSL:SSL,DOCKER:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: DOCKER
       KAFKA_SSL_KEYSTORE_FILENAME: kafka.kafka-2.keystore.jks
       KAFKA_SSL_KEYSTORE_CREDENTIALS: kafka-2_keystore_creds
       KAFKA_SSL_KEY_CREDENTIALS: kafka-2_sslkey_creds
@@ -135,7 +139,9 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_METRIC_REPORTERS: "io.confluent.metrics.reporter.ConfluentMetricsReporter"
       CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: "kafka-1:9092,kafka-2:9092,kafka-3:9092"
-      KAFKA_ADVERTISED_LISTENERS: SSL://kafka-3:39093,PLAINTEXT://kafka-3:39092
+      KAFKA_ADVERTISED_LISTENERS: SSL://kafka-3:39093,PLAINTEXT://kafka-3:39092,DOCKER://kafka-3:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,SSL:SSL,DOCKER:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: DOCKER
       KAFKA_SSL_KEYSTORE_FILENAME: kafka.kafka-3.keystore.jks
       KAFKA_SSL_KEYSTORE_CREDENTIALS: kafka-3_keystore_creds
       KAFKA_SSL_KEY_CREDENTIALS: kafka-3_sslkey_creds
@@ -152,7 +158,7 @@ services:
       - confluent
     environment:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
-      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: "kafka-1:9092,kafka-2:9092,kafka-3:9092"
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: "kafka-1:19092,kafka-2:29092,kafka-3:39092"
       SCHEMA_REGISTRY_LISTENERS: http://schema-registry:8081
 
   control-center:
@@ -180,9 +186,11 @@ services:
     container_name: tools
     hostname: tools
     volumes:
-      - $PWD/client-creds:/client-creds
+      - $PWD:/secure-cluster
+      - $PWD/client-creds:/etc/kafka/secrets
     networks:
       - confluent
+    working_dir: /secure-cluster
     command: /bin/sh
     tty: true
 
@@ -199,3 +207,4 @@ volumes:
 
 networks:
   confluent:
+  
