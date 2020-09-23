@@ -1,4 +1,4 @@
-# training-operations-src
+# training-administration-src
 
 This repo contains the source code needed for Confluent Administration Training for Apache Kafka.
 
@@ -138,7 +138,7 @@ Don't forget to exit the `tools` container and clean up with `docker-compose dow
 
 * [Training Page](https://www.confluent.io/training/)
   * Start with the *free* introductory course for a great conceptual foundation of Kafka!
-  * If you want to learn about Kafka administration, see our Operations course!
+  * If you want to learn about Kafka administration, see our Administration course!
   * If you already know about Kafka administration, see our Advanced Optimization course!
   * If you want to dig deeper into development, see our Developer course!
   * If you already know a bit about developing Kafka clients, push further with our KSQL and Kafka Streams course!
