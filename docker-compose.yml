@@ -1,7 +1,7 @@
 version: "3.5"
 services:
   zk-1:
-    image: confluentinc/cp-enterprise-kafka:6.0.0-1-ubi8
+    image: confluentinc/cp-zookeeper:6.0.0-1-ubi8
     restart: always
     hostname: zk-1
     container_name: zk-1
