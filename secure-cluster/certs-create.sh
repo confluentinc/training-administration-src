@@ -49,7 +49,7 @@ do
 	# Create pem files and keys used for Schema Registry HTTPS testing
 	#   openssl x509 -noout -modulus -in client.certificate.pem | openssl md5
 	#   openssl rsa -noout -modulus -in client.key | openssl md5 
-        #   echo "GET /" | openssl s_client -connect localhost:8082/subjects -cert client.certificate.pem -key client.key -tls1 
+        #   echo "GET /" | openssl s_client -connect localhost:8082/subjects -cert client.certificate.pem -key client.key -tls1_2 
 	keytool -export -alias $i -file $i-creds/$i.der -keystore $i-creds/kafka.$i.keystore.jks -storepass confluent
 	openssl x509 -inform der -in $i-creds/$i.der -out $i-creds/$i.certificate.pem
 	keytool -importkeystore -srckeystore $i-creds/kafka.$i.keystore.jks -destkeystore $i-creds/$i.keystore.p12 -deststoretype PKCS12 -deststorepass confluent -srcstorepass confluent -noprompt
@@ -59,4 +59,4 @@ done
 
 # waiting for brokers to become available
 		
-while ! openssl s_client -connect kafka-1:19093 -tls1 > /dev/null 2>&1 <<< "q" ; do echo -n "." & sleep 1 ; done
+while ! openssl s_client -connect kafka-1:19093 -tls1_2 > /dev/null 2>&1 <<< "q" ; do echo -n "." & sleep 1 ; done
