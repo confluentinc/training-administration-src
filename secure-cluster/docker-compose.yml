@@ -1,7 +1,7 @@
 version: "3.5"
 services:
   zk-1:
-    image: confluentinc/cp-zookeeper:5.5.0-1-ubi8
+    image: confluentinc/cp-zookeeper:6.0.0-1-ubi8
     restart: always
     container_name: zk-1
     hostname: zk-1
@@ -21,7 +21,7 @@ services:
       - ZOOKEEPER_SERVERS=zk-1:2888:3888;zk-2:2888:3888;zk-3:2888:3888
   
   zk-2:
-    image: confluentinc/cp-zookeeper:5.5.0-1-ubi8
+    image: confluentinc/cp-zookeeper:6.0.0-1-ubi8
     restart: always
     container_name: zk-2
     hostname: zk-2
@@ -41,7 +41,7 @@ services:
       - ZOOKEEPER_SERVERS=zk-1:2888:3888;zk-2:2888:3888;zk-3:2888:3888
   
   zk-3:
-    image: confluentinc/cp-zookeeper:5.5.0-1-ubi8
+    image: confluentinc/cp-zookeeper:6.0.0-1-ubi8
     restart: always
     container_name: zk-3
     hostname: zk-3
@@ -61,7 +61,7 @@ services:
       - ZOOKEEPER_SERVERS=zk-1:2888:3888;zk-2:2888:3888;zk-3:2888:3888
 
   kafka-1:
-    image: confluentinc/cp-enterprise-kafka:5.5.0-1-ubi8
+    image: confluentinc/cp-enterprise-kafka:6.0.0-1-ubi8
     restart: always
     container_name: kafka-1
     hostname: kafka-1
@@ -101,7 +101,7 @@ services:
       #KAFKA_SSL_CLIENT_AUTH: "required"
 
   kafka-2:
-    image: confluentinc/cp-enterprise-kafka:5.5.0-1-ubi8
+    image: confluentinc/cp-enterprise-kafka:6.0.0-1-ubi8
     restart: always
     container_name: kafka-2
     hostname: kafka-2
@@ -141,7 +141,7 @@ services:
       #KAFKA_SSL_CLIENT_AUTH: "required"
 
   kafka-3:
-    image: confluentinc/cp-enterprise-kafka:5.5.0-1-ubi8
+    image: confluentinc/cp-enterprise-kafka:6.0.0-1-ubi8
     restart: always
     container_name: kafka-3
     hostname: kafka-3
@@ -181,7 +181,7 @@ services:
       #KAFKA_SSL_CLIENT_AUTH: "required"
 
   tools:
-    image: cnfltraining/training-tools:5.5
+    image: cnfltraining/training-tools:6.0
     restart: always
     container_name: tools
     hostname: tools
