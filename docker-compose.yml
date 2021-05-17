@@ -76,7 +76,10 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: DOCKER
       KAFKA_METRIC_REPORTERS: "io.confluent.metrics.reporter.ConfluentMetricsReporter"
       CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: "kafka-1:9092,kafka-2:9092,kafka-3:9092"
-
+    depends_on:
+      - zk-1
+      - zk-2
+      - zk-3
   kafka-2:
     image: confluentinc/cp-enterprise-kafka:5.3.1
     hostname: kafka-2
@@ -96,6 +99,10 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: DOCKER
       KAFKA_METRIC_REPORTERS: "io.confluent.metrics.reporter.ConfluentMetricsReporter"
       CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: "kafka-1:9092,kafka-2:9092,kafka-3:9092"
+    depends_on:
+      - zk-1
+      - zk-2
+      - zk-3
 
   kafka-3:
     image: confluentinc/cp-enterprise-kafka:5.3.1
@@ -116,6 +123,10 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: DOCKER
       KAFKA_METRIC_REPORTERS: "io.confluent.metrics.reporter.ConfluentMetricsReporter"
       CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: "kafka-1:9092,kafka-2:9092,kafka-3:9092"
+    depends_on:
+      - zk-1
+      - zk-2
+      - zk-3
 
   schema-registry:
     image: confluentinc/cp-schema-registry:5.3.1
@@ -134,6 +145,10 @@ services:
       # will be available in the CP 5.4 image.
       KAFKA_REST_CUB_KAFKA_TIMEOUT: 120
       KAFKA_REST_CUB_KAFKA_MIN_BROKERS: 3
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
 
   connect:
     image: confluentinc/cp-kafka-connect:5.3.1
@@ -166,6 +181,11 @@ services:
       CONNECT_REST_HOST_NAME: "connect"
       CONNECT_REST_PORT: 8083
       CONNECT_CUB_KAFKA_TIMEOUT: 120
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
+      - schema-registry
 
   ksql-server:
     image: confluentinc/cp-ksql-server:5.3.1
@@ -189,6 +209,11 @@ services:
       KSQL_KSQL_SCHEMA_REGISTRY_URL: "http://schema-registry:8081"
       KSQL_PRODUCER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor"
       KSQL_CONSUMER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor"
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
+      - schema-registry
 
   control-center:
     image: confluentinc/cp-enterprise-control-center:5.3.1
