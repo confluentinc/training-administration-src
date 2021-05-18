@@ -76,6 +76,10 @@ services:
       KAFKA_SSL_TRUSTSTORE_CREDENTIALS: kafka-1_truststore_creds
       KAFKA_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM: "HTTPS"
       #KAFKA_SSL_CLIENT_AUTH: "required"
+    depends_on:
+      - zk-1
+      - zk-2
+      - zk-3
 
   kafka-2:
     image: confluentinc/cp-enterprise-kafka:5.3.0
@@ -102,6 +106,10 @@ services:
       KAFKA_SSL_TRUSTSTORE_CREDENTIALS: kafka-2_truststore_creds
       KAFKA_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM: "HTTPS"
       #KAFKA_SSL_CLIENT_AUTH: "required"
+    depends_on:
+      - zk-1
+      - zk-2
+      - zk-3
 
   kafka-3:
     image: confluentinc/cp-enterprise-kafka:5.3.0
@@ -128,6 +136,10 @@ services:
       KAFKA_SSL_TRUSTSTORE_CREDENTIALS: kafka-3_truststore_creds
       KAFKA_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM: "HTTPS"
       #KAFKA_SSL_CLIENT_AUTH: "required"
+    depends_on:
+      - zk-1
+      - zk-2
+      - zk-3
 
   schema-registry:
     image: confluentinc/cp-schema-registry:5.3.0
@@ -139,6 +151,10 @@ services:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: "kafka-1:9092,kafka-2:9092,kafka-3:9092"
       SCHEMA_REGISTRY_LISTENERS: http://schema-registry:8081
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
 
   control-center:
     image: confluentinc/cp-enterprise-control-center:5.3.0
