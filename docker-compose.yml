@@ -283,3 +283,17 @@ services:
             CONTROL_CENTER_KSQL_KSQL_URL:
         ports:
             - 9021:9021
+
+
+    # tools:
+    #     image: cnfltraining/training-tools:7.5
+    #     restart: always
+    #     hostname: tools
+    #     container_name: tools
+    #     volumes:
+    #         - ${PWD}:/apps
+    #     environment:
+    #         CLASSPATH: "/usr/share/java/monitoring-interceptors/monitoring-interceptors-7.5.3.jar"
+    #     working_dir: /apps
+    #     command: /bin/bash
+    #     tty: true
