@@ -5,6 +5,8 @@ services:
         image: confluentinc/cp-server:7.5.2
         hostname: controller-1
         container_name: controller-1
+        volumes:
+            - data-controller-1:/var/lib/kafka/data
 
         environment:
             KAFKA_NODE_ID: 9991
@@ -34,6 +36,8 @@ services:
         image: confluentinc/cp-server:7.5.2
         hostname: controller-2
         container_name: controller-2
+        volumes:
+            - data-controller-2:/var/lib/kafka/data
 
         environment:
             KAFKA_NODE_ID: 9992
@@ -63,6 +67,8 @@ services:
         image: confluentinc/cp-server:7.5.2
         hostname: controller-3
         container_name: controller-3
+        volumes:
+            - data-controller-3:/var/lib/kafka/data
 
         environment:
             KAFKA_NODE_ID: 9993
@@ -92,6 +98,8 @@ services:
         image: confluentinc/cp-server:7.5.2
         hostname: kafka-1
         container_name: kafka-1
+        volumes:
+            - data-kafka-1:/var/lib/kafka/data
 
         healthcheck:
             test: curl -fail --silent http://kafka-1:8090/kafka/v3/clusters/ --output /dev/null || exit 1
@@ -129,6 +137,8 @@ services:
         image: confluentinc/cp-server:7.5.2
         hostname: kafka-2
         container_name: kafka-2
+        volumes:
+            - data-kafka-2:/var/lib/kafka/data
 
         healthcheck:
             test: curl -fail --silent http://kafka-2:8090/kafka/v3/clusters/ --output /dev/null || exit 1
@@ -166,6 +176,8 @@ services:
         image: confluentinc/cp-server:7.5.2
         hostname: kafka-3
         container_name: kafka-3
+        volumes:
+            - data-kafka-3:/var/lib/kafka/data
 
         healthcheck:
             test: curl -fail --silent http://kafka-3:8090/kafka/v3/clusters/ --output /dev/null || exit 1
@@ -296,3 +308,12 @@ services:
     #     working_dir: /apps
     #     command: /bin/bash
     #     tty: true
+
+
+volumes:
+  data-controller-1:
+  data-controller-2:
+  data-controller-3:
+  data-kafka-1:
+  data-kafka-2:
+  data-kafka-3:
