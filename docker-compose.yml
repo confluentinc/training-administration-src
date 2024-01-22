@@ -7,7 +7,6 @@ services:
         container_name: controller-1
         volumes:
             - data-controller-1:/var/lib/kafka/data
-
         environment:
             KAFKA_NODE_ID: 9991
             CLUSTER_ID: Nk018hRAQFytWskYqtQduw
@@ -26,6 +25,7 @@ services:
             KAFKA_CONFLUENT_LICENSE_TOPIC_REPLICATION_FACTOR: 3
             KAFKA_CONFLUENT_METADATA_TOPIC_REPLICATION_FACTOR: 3
             KAFKA_CONFLUENT_BALANCER_TOPIC_REPLICATION_FACTOR: 3
+            KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
             KAFKA_CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka-1:9092,kafka-2:9092,kafka-3:9092
         cap_add:
             - NET_ADMIN
@@ -38,7 +38,6 @@ services:
         container_name: controller-2
         volumes:
             - data-controller-2:/var/lib/kafka/data
-
         environment:
             KAFKA_NODE_ID: 9992
             CLUSTER_ID: Nk018hRAQFytWskYqtQduw
@@ -57,6 +56,7 @@ services:
             KAFKA_CONFLUENT_LICENSE_TOPIC_REPLICATION_FACTOR: 3
             KAFKA_CONFLUENT_METADATA_TOPIC_REPLICATION_FACTOR: 3
             KAFKA_CONFLUENT_BALANCER_TOPIC_REPLICATION_FACTOR: 3
+            KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
             KAFKA_CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka-1:9092,kafka-2:9092,kafka-3:9092
         cap_add:
             - NET_ADMIN
@@ -69,7 +69,6 @@ services:
         container_name: controller-3
         volumes:
             - data-controller-3:/var/lib/kafka/data
-
         environment:
             KAFKA_NODE_ID: 9993
             CLUSTER_ID: Nk018hRAQFytWskYqtQduw
@@ -88,6 +87,7 @@ services:
             KAFKA_CONFLUENT_LICENSE_TOPIC_REPLICATION_FACTOR: 3
             KAFKA_CONFLUENT_METADATA_TOPIC_REPLICATION_FACTOR: 3
             KAFKA_CONFLUENT_BALANCER_TOPIC_REPLICATION_FACTOR: 3
+            KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
             KAFKA_CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka-1:9092,kafka-2:9092,kafka-3:9092
         cap_add:
             - NET_ADMIN
@@ -100,7 +100,6 @@ services:
         container_name: kafka-1
         volumes:
             - data-kafka-1:/var/lib/kafka/data
-
         healthcheck:
             test: curl -fail --silent http://kafka-1:8090/kafka/v3/clusters/ --output /dev/null || exit 1
             interval: 10s
@@ -139,7 +138,6 @@ services:
         container_name: kafka-2
         volumes:
             - data-kafka-2:/var/lib/kafka/data
-
         healthcheck:
             test: curl -fail --silent http://kafka-2:8090/kafka/v3/clusters/ --output /dev/null || exit 1
             interval: 10s
@@ -178,7 +176,6 @@ services:
         container_name: kafka-3
         volumes:
             - data-kafka-3:/var/lib/kafka/data
-
         healthcheck:
             test: curl -fail --silent http://kafka-3:8090/kafka/v3/clusters/ --output /dev/null || exit 1
             interval: 10s
@@ -215,7 +212,6 @@ services:
         image: confluentinc/cp-schema-registry:7.5.2
         hostname: schema-registry
         container_name: schema-registry
-
         healthcheck:
             test: curl -fail --silent http://schema-registry:8081/subjects --output /dev/null || exit 1
             interval: 10s
@@ -239,7 +235,6 @@ services:
         image: confluentinc/cp-server-connect:7.5.2
         hostname: kafka-connect
         container_name: kafka-connect
-
         healthcheck:
             test: curl -fail --silent http://kafka-connect:8083/connectors --output /dev/null || exit 1
             interval: 10s
@@ -274,12 +269,12 @@ services:
             - 8083:8083
         volumes:
             - $PWD/volumes/connect-plugin-jars:/data/connect-plugin-jars
+            - ./data:/data
 
     control-center:
         image: confluentinc/cp-enterprise-control-center:7.5.2
         hostname: control-center
         container_name: control-center
-
         depends_on:
             kafka-1:
                 condition: service_healthy
@@ -292,7 +287,6 @@ services:
             CONTROL_CENTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
             CONTROL_CENTER_REPLICATION_FACTOR: 3
             CONTROL_CENTER_CONNECT_CONNECT_CLUSTER: http://kafka-connect:8083
-            CONTROL_CENTER_KSQL_KSQL_URL:
         ports:
             - 9021:9021
 
@@ -308,7 +302,6 @@ services:
     #     working_dir: /apps
     #     command: /bin/bash
     #     tty: true
-
 
 volumes:
   data-controller-1:
