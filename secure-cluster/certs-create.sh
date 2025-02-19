@@ -1,15 +1,29 @@
-#!/bin/bash
+#! /bin/bash
+#
+# Copyright (c) 2019-2025 Confluent Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 
 set -o nounset \
     -o errexit \
     -o verbose
-#    -o xtrace
 
 # Cleanup files
 find . \( -type f -name "*.crt" -o -name "*.csr" -o -name "*_creds" -o -name "*.jks" -o -name "*.srl" -o -name "*.key" -o -name "*.pem" -o -name "*.der" -o -name "*.p12" \)  -delete
 
 # Generate CA key
-openssl req -new -x509 -keyout ca.key -out ca.crt -days 365 -subj '/CN=ca1.test.confluent.io/OU=TEST/O=CONFLUENT/L=PaloAlto/S=Ca/C=US' -passin pass:confluent -passout pass:confluent
+openssl req -new -x509 -keyout ca.key -out ca.crt -days 365 -subj '/CN=ca1.test.confluent.io/OU=TEST/O=CONFLUENT/L=MountainView/S=Ca/C=US' -passin pass:confluent -passout pass:confluent
 
 
 for i in kafka-1 kafka-2 kafka-3 client
@@ -19,7 +33,7 @@ do
 	# Create host keystore
 	keytool -genkey -noprompt \
 				 -alias $i \
-				 -dname "CN=$i,OU=TEST,O=CONFLUENT,L=PaloAlto,S=Ca,C=US" \
+				 -dname "CN=$i,OU=TEST,O=CONFLUENT,L=MountainView,S=Ca,C=US" \
                                  -ext san=dns:$i \
 				 -keystore $i-creds/kafka.$i.keystore.jks \
 				 -keyalg RSA \
