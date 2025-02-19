@@ -2,7 +2,7 @@
 version: "3.8"
 services:
     controller-1:
-        image: confluentinc/cp-server:7.5.2
+        image: confluentinc/cp-server:7.8.1
         hostname: controller-1
         container_name: controller-1
         volumes:
@@ -33,7 +33,7 @@ services:
             - 19093:19093
 
     controller-2:
-        image: confluentinc/cp-server:7.5.2
+        image: confluentinc/cp-server:7.8.1
         hostname: controller-2
         container_name: controller-2
         volumes:
@@ -64,7 +64,7 @@ services:
             - 29093:29093
 
     controller-3:
-        image: confluentinc/cp-server:7.5.2
+        image: confluentinc/cp-server:7.8.1
         hostname: controller-3
         container_name: controller-3
         volumes:
@@ -95,7 +95,7 @@ services:
             - 39093:39093
 
     kafka-1:
-        image: confluentinc/cp-server:7.5.2
+        image: confluentinc/cp-server:7.8.1
         hostname: kafka-1
         container_name: kafka-1
         volumes:
@@ -133,7 +133,7 @@ services:
             - 10001:10001
 
     kafka-2:
-        image: confluentinc/cp-server:7.5.2
+        image: confluentinc/cp-server:7.8.1
         hostname: kafka-2
         container_name: kafka-2
         volumes:
@@ -171,7 +171,7 @@ services:
             - 10002:10002
 
     kafka-3:
-        image: confluentinc/cp-server:7.5.2
+        image: confluentinc/cp-server:7.8.1
         hostname: kafka-3
         container_name: kafka-3
         volumes:
@@ -209,7 +209,7 @@ services:
             - 10003:10003
 
     schema-registry:
-        image: confluentinc/cp-schema-registry:7.5.2
+        image: confluentinc/cp-schema-registry:7.8.1
         hostname: schema-registry
         container_name: schema-registry
         healthcheck:
@@ -232,7 +232,7 @@ services:
             - 8081:8081
 
     kafka-connect:
-        image: confluentinc/cp-server-connect:7.5.2
+        image: confluentinc/cp-server-connect:7.8.1
         hostname: kafka-connect
         container_name: kafka-connect
         healthcheck:
@@ -272,7 +272,7 @@ services:
             - ./data:/data
 
     control-center:
-        image: confluentinc/cp-enterprise-control-center:7.5.2
+        image: confluentinc/cp-enterprise-control-center:7.8.1
         hostname: control-center
         container_name: control-center
         depends_on:
