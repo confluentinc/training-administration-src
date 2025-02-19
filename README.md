@@ -22,7 +22,8 @@ docker-compose down -v
 
 ## The Tools Container
 
-Enter the `tools` container to run commands against the Kafka cluster:
+First, enable the container by removing the comments on the `tools` container definition in `docker-compose.yml` . 
+Then, enter the `tools` container to run commands against the Kafka cluster:
 
 ```
 docker-compose exec tools bash
@@ -82,21 +83,22 @@ How might you do a consumer performance test, I wonder?
 
 1. Enter the broker host `kafka-1`:
 
-```
-docker-compose exec kafka-1 bash
-```
+    ```
+   docker-compose exec kafka-1 bash
+    ```
 2. Take a look at `server.propertes`:
 
-```
-root@kafka-1:/# less /etc/kafka/server.properties
-```
+    ```
+    root@kafka-1:/# less /etc/kafka/server.properties
+    ```
 
-This is just an example broker configuration file. For complicated reasons, the actual configuration file the container uses is called `kafka.properties` and is created from environment variables in `docker-compose.yml`. 
+    This is just an example broker configuration file. For complicated reasons, the actual configuration file the container uses is called `kafka.properties` and is created from environment variables in `docker-compose.yml`. 
 
 3. Take a look at `docker-compose.yml` environment variables and compare that to `kafka.properties`:
-```
-root@kafka-1:/# less /etc/kafka/kafka.properties
-```
+
+    ```
+    root@kafka-1:/# less /etc/kafka/kafka.properties
+    ```
 
 4. Other components of the cluster have similar configuration files. Explore them, too! Look up what the configuration properties do in more detail in the [Confluent docs](https://docs.confluent.io/current/installation/configuration/index.html)
 
@@ -152,7 +154,7 @@ Don't forget to exit the `tools` container and clean up with `docker-compose dow
 * [Kafka Tutorials](https://kafka-tutorials.confluent.io/)
   * Tutorials about how to accomplish specific tasks. A great place to see best practices in code, testing, and artifact building (with Gradle Jib).
 * [ksqlDB.io](https://ksqldb.io/)
-  * Your one stop shop for all things ksqlDB (docs, examples, concepts) 
+  * Your one-stop shop for all things ksqlDB (docs, examples, concepts) 
 * [Ansible playbook](https://github.com/confluentinc/cp-ansible)
   * Automate configuration!
 * [Configurations!](https://docs.confluent.io/current/installation/configuration/index.html)
