@@ -12,8 +12,8 @@ services:
             CLUSTER_ID: Nk018hRAQFytWskYqtQduw
             KAFKA_PROCESS_ROLES: controller
             KAFKA_LISTENERS: CONTROLLER://controller-1:19093
-            KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT
-            KAFKA_INTER_BROKER_LISTENER_NAME: CONTROLLER
+            KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,DOCKER:PLAINTEXT
+            KAFKA_INTER_BROKER_LISTENER_NAME: DOCKER
             KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
             KAFKA_CONTROLLER_QUORUM_VOTERS: 9991@controller-1:19093,9992@controller-2:29093,9993@controller-3:39093
             KAFKA_JMX_PORT: 9999
@@ -27,6 +27,7 @@ services:
             KAFKA_CONFLUENT_BALANCER_TOPIC_REPLICATION_FACTOR: 3
             KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
             KAFKA_CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka-1:9092,kafka-2:9092,kafka-3:9092
+            KAFKA_CONFLUENT_BALANCER_ENABLE: false
         cap_add:
             - NET_ADMIN
         ports:
@@ -43,8 +44,8 @@ services:
             CLUSTER_ID: Nk018hRAQFytWskYqtQduw
             KAFKA_PROCESS_ROLES: controller
             KAFKA_LISTENERS: CONTROLLER://controller-2:29093
-            KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT
-            KAFKA_INTER_BROKER_LISTENER_NAME: CONTROLLER
+            KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,DOCKER:PLAINTEXT
+            KAFKA_INTER_BROKER_LISTENER_NAME: DOCKER
             KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
             KAFKA_CONTROLLER_QUORUM_VOTERS: 9991@controller-1:19093,9992@controller-2:29093,9993@controller-3:39093
             KAFKA_JMX_PORT: 9999
@@ -58,6 +59,7 @@ services:
             KAFKA_CONFLUENT_BALANCER_TOPIC_REPLICATION_FACTOR: 3
             KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
             KAFKA_CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka-1:9092,kafka-2:9092,kafka-3:9092
+            KAFKA_CONFLUENT_BALANCER_ENABLE: false
         cap_add:
             - NET_ADMIN
         ports:
@@ -74,8 +76,8 @@ services:
             CLUSTER_ID: Nk018hRAQFytWskYqtQduw
             KAFKA_PROCESS_ROLES: controller
             KAFKA_LISTENERS: CONTROLLER://controller-3:39093
-            KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT
-            KAFKA_INTER_BROKER_LISTENER_NAME: CONTROLLER
+            KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,DOCKER:PLAINTEXT
+            KAFKA_INTER_BROKER_LISTENER_NAME: DOCKER
             KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
             KAFKA_CONTROLLER_QUORUM_VOTERS: 9991@controller-1:19093,9992@controller-2:29093,9993@controller-3:39093
             KAFKA_JMX_PORT: 9999
@@ -89,6 +91,7 @@ services:
             KAFKA_CONFLUENT_BALANCER_TOPIC_REPLICATION_FACTOR: 3
             KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
             KAFKA_CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka-1:9092,kafka-2:9092,kafka-3:9092
+            KAFKA_CONFLUENT_BALANCER_ENABLE: false
         cap_add:
             - NET_ADMIN
         ports:
@@ -118,7 +121,6 @@ services:
             KAFKA_JMX_PORT: 10001
             KAFKA_JMX_HOSTNAME: localhost
             KAFKA_BROKER_RACK: rack-0
-            # KAFKA_MIN_INSYNC_REPLICAS: 2
             KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
             KAFKA_NODE_ID: 1
             CLUSTER_ID: Nk018hRAQFytWskYqtQduw
@@ -126,6 +128,7 @@ services:
             KAFKA_PROCESS_ROLES: broker
             KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
             KAFKA_CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka-1:9092,kafka-2:9092,kafka-3:9092
+            KAFKA_CONFLUENT_BALANCER_ENABLE: false
         cap_add:
             - NET_ADMIN
         ports:
@@ -156,7 +159,6 @@ services:
             KAFKA_JMX_PORT: 10002
             KAFKA_JMX_HOSTNAME: localhost
             KAFKA_BROKER_RACK: rack-0
-            # KAFKA_MIN_INSYNC_REPLICAS: 2
             KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
             KAFKA_NODE_ID: 2
             CLUSTER_ID: Nk018hRAQFytWskYqtQduw
@@ -164,6 +166,7 @@ services:
             KAFKA_PROCESS_ROLES: broker
             KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
             KAFKA_CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka-1:9092,kafka-2:9092,kafka-3:9092
+            KAFKA_CONFLUENT_BALANCER_ENABLE: false
         cap_add:
             - NET_ADMIN
         ports:
@@ -194,7 +197,6 @@ services:
             KAFKA_JMX_PORT: 10003
             KAFKA_JMX_HOSTNAME: localhost
             KAFKA_BROKER_RACK: rack-0
-            # KAFKA_MIN_INSYNC_REPLICAS: 2
             KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
             KAFKA_NODE_ID: 3
             CLUSTER_ID: Nk018hRAQFytWskYqtQduw
@@ -202,6 +204,7 @@ services:
             KAFKA_PROCESS_ROLES: broker
             KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
             KAFKA_CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka-1:9092,kafka-2:9092,kafka-3:9092
+            KAFKA_CONFLUENT_BALANCER_ENABLE: false
         cap_add:
             - NET_ADMIN
         ports:
