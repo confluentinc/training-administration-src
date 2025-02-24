@@ -22,4 +22,8 @@ export BOOTSTRAPS="kafka-1:19092,kafka-2:29092,kafka-3:39092"
 EOF
 
 x='source ~/.myvars' ; grep -qxF "$x" ~/.bashrc || echo "$x" >>~/.bashrc
-exit 0
+cat <<EOF
+To add the variables to a terminal that is already opened (like this one), please run ". ~/.bashrc"
+For terminals opened from this point onwards, the variables will be automatically added.
+EOF
+
