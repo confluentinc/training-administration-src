@@ -1,5 +1,3 @@
----
-version: "3.8"
 services:
     controller-1:
         image: confluentinc/cp-server:7.8.1
@@ -7,6 +5,10 @@ services:
         container_name: controller-1
         volumes:
             - data-controller-1:/var/lib/kafka/data
+        healthcheck:
+            test: kafka-metadata-quorum --bootstrap-controller controller-1:19093 describe --status >/dev/null 2>&1
+            interval: 1s
+            retries: 5
         environment:
             KAFKA_NODE_ID: 9991
             CLUSTER_ID: Nk018hRAQFytWskYqtQduw
@@ -28,10 +30,13 @@ services:
             KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
             KAFKA_CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka-1:9092,kafka-2:9092,kafka-3:9092
             KAFKA_CONFLUENT_BALANCER_ENABLE: false
+            # KAFKA_GROUP_COORDINATOR_REBALANCE_PROTOCOLS: classic,consumer
+            # KAFKA_TRANSACTION_PARTITION_VERIFICATION_ENABLE: false
+
         cap_add:
             - NET_ADMIN
         ports:
-            - 19093:19093
+            - "19093:19093"
 
     controller-2:
         image: confluentinc/cp-server:7.8.1
@@ -39,6 +44,10 @@ services:
         container_name: controller-2
         volumes:
             - data-controller-2:/var/lib/kafka/data
+        healthcheck:
+            test: kafka-metadata-quorum --bootstrap-controller controller-2:29093 describe --status >/dev/null 2>&1
+            interval: 1s
+            retries: 5
         environment:
             KAFKA_NODE_ID: 9992
             CLUSTER_ID: Nk018hRAQFytWskYqtQduw
@@ -60,10 +69,12 @@ services:
             KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
             KAFKA_CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka-1:9092,kafka-2:9092,kafka-3:9092
             KAFKA_CONFLUENT_BALANCER_ENABLE: false
+            # KAFKA_GROUP_COORDINATOR_REBALANCE_PROTOCOLS: classic,consumer
+            # KAFKA_TRANSACTION_PARTITION_VERIFICATION_ENABLE: false
         cap_add:
             - NET_ADMIN
         ports:
-            - 29093:29093
+            - "29093:29093"
 
     controller-3:
         image: confluentinc/cp-server:7.8.1
@@ -71,6 +82,10 @@ services:
         container_name: controller-3
         volumes:
             - data-controller-3:/var/lib/kafka/data
+        healthcheck:
+            test: kafka-metadata-quorum --bootstrap-controller controller-3:39093 describe --status >/dev/null 2>&1
+            interval: 1s
+            retries: 5
         environment:
             KAFKA_NODE_ID: 9993
             CLUSTER_ID: Nk018hRAQFytWskYqtQduw
@@ -92,10 +107,12 @@ services:
             KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
             KAFKA_CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka-1:9092,kafka-2:9092,kafka-3:9092
             KAFKA_CONFLUENT_BALANCER_ENABLE: false
+            # KAFKA_GROUP_COORDINATOR_REBALANCE_PROTOCOLS: classic,consumer
+            # KAFKA_TRANSACTION_PARTITION_VERIFICATION_ENABLE: false
         cap_add:
             - NET_ADMIN
         ports:
-            - 39093:39093
+            - "39093:39093"
 
     kafka-1:
         image: confluentinc/cp-server:7.8.1
@@ -104,14 +121,16 @@ services:
         volumes:
             - data-kafka-1:/var/lib/kafka/data
         healthcheck:
-            test: curl -fail --silent http://kafka-1:8090/kafka/v3/clusters/ --output /dev/null || exit 1
-            interval: 10s
-            retries: 10
-            start_period: 20s
+            test: kafka-topics --bootstrap-server kafka-1:9092 --list >/dev/null 2>&1
+            interval: 1s
+            retries: 5
         depends_on:
-            - controller-1
-            - controller-2
-            - controller-3
+            controller-1:
+                condition: service_healthy
+            controller-2:
+                condition: service_healthy
+            controller-3:
+                condition: service_healthy
         environment:
             KAFKA_LISTENERS: DOCKER://kafka-1:9092, EXTERNAL://kafka-1:19092
             KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,DOCKER:PLAINTEXT,EXTERNAL:PLAINTEXT
@@ -129,11 +148,13 @@ services:
             KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
             KAFKA_CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka-1:9092,kafka-2:9092,kafka-3:9092
             KAFKA_CONFLUENT_BALANCER_ENABLE: false
+            # KAFKA_GROUP_COORDINATOR_REBALANCE_PROTOCOLS: classic,consumer
+            # KAFKA_TRANSACTION_PARTITION_VERIFICATION_ENABLE: false
         cap_add:
             - NET_ADMIN
         ports:
-            - 19092:19092
-            - 10001:10001
+            - "19092:19092"
+            - "10001:10001"
 
     kafka-2:
         image: confluentinc/cp-server:7.8.1
@@ -142,14 +163,16 @@ services:
         volumes:
             - data-kafka-2:/var/lib/kafka/data
         healthcheck:
-            test: curl -fail --silent http://kafka-2:8090/kafka/v3/clusters/ --output /dev/null || exit 1
-            interval: 10s
-            retries: 10
-            start_period: 20s
+            test: kafka-topics --bootstrap-server kafka-2:9092 --list >/dev/null 2>&1
+            interval: 1s
+            retries: 5
         depends_on:
-            - controller-1
-            - controller-2
-            - controller-3
+            controller-1:
+                condition: service_healthy
+            controller-2:
+                condition: service_healthy
+            controller-3:
+                condition: service_healthy
         environment:
             KAFKA_LISTENERS: DOCKER://kafka-2:9092, EXTERNAL://kafka-2:29092
             KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,DOCKER:PLAINTEXT,EXTERNAL:PLAINTEXT
@@ -167,11 +190,13 @@ services:
             KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
             KAFKA_CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka-1:9092,kafka-2:9092,kafka-3:9092
             KAFKA_CONFLUENT_BALANCER_ENABLE: false
+            # KAFKA_GROUP_COORDINATOR_REBALANCE_PROTOCOLS: classic,consumer
+            # KAFKA_TRANSACTION_PARTITION_VERIFICATION_ENABLE: false
         cap_add:
             - NET_ADMIN
         ports:
-            - 29092:29092
-            - 10002:10002
+            - "29092:29092"
+            - "10002:10002"
 
     kafka-3:
         image: confluentinc/cp-server:7.8.1
@@ -180,14 +205,16 @@ services:
         volumes:
             - data-kafka-3:/var/lib/kafka/data
         healthcheck:
-            test: curl -fail --silent http://kafka-3:8090/kafka/v3/clusters/ --output /dev/null || exit 1
-            interval: 10s
-            retries: 10
-            start_period: 20s
+            test: kafka-topics --bootstrap-server kafka-3:9092 --list >/dev/null 2>&1
+            interval: 1s
+            retries: 5
         depends_on:
-            - controller-1
-            - controller-2
-            - controller-3
+            controller-1:
+                condition: service_healthy
+            controller-2:
+                condition: service_healthy
+            controller-3:
+                condition: service_healthy
         environment:
             KAFKA_LISTENERS: DOCKER://kafka-3:9092, EXTERNAL://kafka-3:39092
             KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,DOCKER:PLAINTEXT,EXTERNAL:PLAINTEXT
@@ -205,11 +232,13 @@ services:
             KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
             KAFKA_CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka-1:9092,kafka-2:9092,kafka-3:9092
             KAFKA_CONFLUENT_BALANCER_ENABLE: false
+            # KAFKA_GROUP_COORDINATOR_REBALANCE_PROTOCOLS: classic,consumer
+            # KAFKA_TRANSACTION_PARTITION_VERIFICATION_ENABLE: false
         cap_add:
             - NET_ADMIN
         ports:
-            - 39092:39092
-            - 10003:10003
+            - "39092:39092"
+            - "10003:10003"
 
     schema-registry:
         image: confluentinc/cp-schema-registry:7.8.1
@@ -232,7 +261,7 @@ services:
             SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: kafka-1:9092,kafka-2:9092,kafka-3:9092
             SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
         ports:
-            - 8081:8081
+            - "8081:8081"
 
     kafka-connect:
         image: confluentinc/cp-server-connect:7.8.1
@@ -250,6 +279,8 @@ services:
                 condition: service_healthy
             kafka-3:
                 condition: service_healthy
+            # schema-registry:
+            #     condition: service_healthy
         environment:
             CONNECT_REST_ADVERTISED_PORT: 8083
             CONNECT_REST_PORT: 8083
@@ -269,7 +300,7 @@ services:
             CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 3
             CONNECT_PLUGIN_PATH: /usr/share/java,/usr/share/confluent-hub-components,/data/connect-plugin-jars,/usr/share/filestream-connectors
         ports:
-            - 8083:8083
+            - "8083:8083"
         volumes:
             - $PWD/volumes/connect-plugin-jars:/data/connect-plugin-jars
             - ./data:/data
@@ -285,13 +316,17 @@ services:
                 condition: service_healthy
             kafka-3:
                 condition: service_healthy
+            # schema-registry:
+            #     condition: service_healthy
+            # kafka-connect:
+            #     condition: service_healthy
         environment:
             CONTROL_CENTER_BOOTSTRAP_SERVERS: kafka-1:9092,kafka-2:9092,kafka-3:9092
             CONTROL_CENTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
             CONTROL_CENTER_REPLICATION_FACTOR: 3
             CONTROL_CENTER_CONNECT_CONNECT_CLUSTER: http://kafka-connect:8083
         ports:
-            - 9021:9021
+            - "9021:9021"
 
     # tools:
     #     image: cnfltraining/training-tools:7.5
@@ -307,9 +342,9 @@ services:
     #     tty: true
 
 volumes:
-  data-controller-1:
-  data-controller-2:
-  data-controller-3:
-  data-kafka-1:
-  data-kafka-2:
-  data-kafka-3:
+    data-controller-1:
+    data-controller-2:
+    data-controller-3:
+    data-kafka-1:
+    data-kafka-2:
+    data-kafka-3:
