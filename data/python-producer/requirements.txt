@@ -1,3 +1,0 @@
-# Kafka's python client
-confluent-kafka
-# Add other packages you need and run pip install -r requirements.txt
