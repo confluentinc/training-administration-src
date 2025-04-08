@@ -1,6 +1,6 @@
 # training-administration-src
 
-This repo contains the source code needed for Confluent Administration Training for Apache Kafka.
+This repository contains the source code needed for the "Apache Kafka® Administration By Confluent" Instructor-Led Training Course.
 
 ## Start your own Kafka Cluster!
 
