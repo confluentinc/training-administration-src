@@ -11,6 +11,10 @@ set -o nounset
 # shellcheck disable=SC3040
 (set -o pipefail 2> /dev/null) && set -o pipefail
 
+# Bugfix: "data" directory may be created by `docker compose` but even in that case,
+# it is created with insufficient permissions for the Kafka Connect exercise.
+install -m 777 -d "$HOME/confluent-admin/data"
+
 # Set up some local variables
 VARFILE="$HOME/.cpvars" # Where we're writing CP- & Kafka-related values
 # shellcheck disable=SC2088

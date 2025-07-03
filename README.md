@@ -113,7 +113,8 @@ Open up Google Chrome and go to `localhost:9021` to monitor your cluster with Co
   * Start with the **free** _Apache Kafka Fundamentals_ course for a great conceptual foundation of Kafka!
   * _Apache Kafka Administration by Confluent_
   * _Setting Data in Motion with Confluent Cloud_
-  * _Confluent Developers Skills for Building Apache Kafka_
+  * _Confluent Developers Skills for Building Apache Kafka applications_
+  * _Confluent Stream Processing Using Apache Kafka Streams_
   * _Mastering Flink SQL on Confluent Cloud_
   * Remember that more courses are being developed all the time! 
 * [Configurations!](https://docs.confluent.io/current/installation/configuration/index.html)
