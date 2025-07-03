@@ -13,7 +13,7 @@ set -o nounset
 
 # Bugfix: "data" directory may be created by `docker compose` but even in that case,
 # it is created with insufficient permissions for the Kafka Connect exercise.
-install -m 777 -d "$HOME/confluent-admin/data"
+sudo install -m 777 -o training -g users -d "$HOME/confluent-admin/data"
 
 # Set up some local variables
 VARFILE="$HOME/.cpvars" # Where we're writing CP- & Kafka-related values
